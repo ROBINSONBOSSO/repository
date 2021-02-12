@@ -1,9 +1,0 @@
-- name: Maintenance on WEB server
-  hosts: all
-
-  vars:
-      Message: the web servers will be down for 10 min. Please wait.
-
-  tasks:
-  - name: send msg
-    win_shell: msg.exe /server:server1 * "{{ Message }}"
