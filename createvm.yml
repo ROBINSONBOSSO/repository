@@ -8,7 +8,7 @@
       username: administrator@vsphere.local
       password: Sido*313*
       folder: VMtemplate
-      name: testvm1
+      name: VM_AWX_GIT
       state: poweredoff
       guest_id: centos64Guest
       datastore: FreeNAS_LabVMware
