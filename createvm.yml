@@ -18,7 +18,7 @@
         vmware_guest:
           validate_certs: false
           hostname: 172.180.0.200
-          username: administrator@vsphere.local
+          username: "{{ vcenter_user }}"
           password: "{{ vcenter_pass }}"
           folder: VMtemplate
           name: VM_AWX_GIT1
