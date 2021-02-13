@@ -1,32 +1,45 @@
-- name: Create  a VM from a template
-  hosts: localhost
-  tasks:
-  - name: Create a VM from template
-    vmware_guest:
-      validate_certs: false
-      hostname: 172.180.0.200
-      username: administrator@vsphere.local
-      password: Sido*313*
-      folder: VMtemplate
-      name: VM_AWX_GIT
-      state: poweredoff
-      guest_id: centos64Guest
-      datastore: FreeNAS_LabVMware
-      datacenter: Datacenter
-      cluster: Cluster
-      disk:
-      - size_gb: 2
-        type: eagerzeroedthick
-      hardware:
-        memory_mb: 512
-        num_cpus: 1
-        num_cpu_cores_per_socket: 1
-        scsi: paravirtual
-      networks:
-      - name: VM Network
-        mac: aa:bb:dd:aa:00:14
-        ip: 10.10.10.200
-        netmask: 255.255.255.0
-        device type: vmxnet3
-    delegate_to: localhost
-    register: deploy
+ vars_prompt:
+    - name: "vcenter_hostname"
+      prompt: "Enter vcenter hostname"
+      private: no
+      default: "vc65.labvmware.local"
+    - name: "vcenter_user"
+      prompt: "Enter vcenter username"
+      private: no
+      default: "administrator@vsphere.local"
+    - name: "vcenter_pass"
+      prompt: "Enter vcenter password"
+      
+    tasks:
+    - name: Create  a VM from a template
+      hosts: localhost
+      tasks:
+      - name: Create a VM from template
+        vmware_guest:
+          validate_certs: false
+          hostname: 172.180.0.200
+          username: administrator@vsphere.local
+          password: "{{ vcenter_pass }}"
+          folder: VMtemplate
+          name: VM_AWX_GIT1
+          state: poweredoff
+          guest_id: centos64Guest
+          datastore: FreeNAS_LabVMware
+          datacenter: Datacenter
+          cluster: Cluster
+          disk:
+          - size_gb: 2
+            type: eagerzeroedthick
+          hardware:
+            memory_mb: 512
+            num_cpus: 1
+            num_cpu_cores_per_socket: 1
+            scsi: paravirtual
+          networks:
+          - name: VM Network
+            mac: aa:bb:dd:aa:00:14
+            ip: 10.10.10.200
+            netmask: 255.255.255.0
+            device type: vmxnet3
+        delegate_to: localhost
+        register: deploy
